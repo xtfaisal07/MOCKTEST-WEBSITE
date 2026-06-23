@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>69th BPSC Prelims · Set A · Mock Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F3FF;
+  --paper-dim:#EAE5FB;
+  --indigo:#2E2A8C;
+  --indigo-soft:#4842B8;
+  --coral:#FF5C5C;
+  --teal:#0EAD7C;
+  --amber:#FFB627;
+  --violet:#7B5EE8;
+  --graphite:#5F5A78;
+  --line:#DDD6F5;
+  --ink:#211C42;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-tap-highlight-color:transparent;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  background-image:
+    radial-gradient(circle at 8% 0%, rgba(123,94,232,0.10), transparent 42%),
+    radial-gradient(circle at 95% 8%, rgba(255,182,39,0.10), transparent 38%),
+    radial-gradient(circle at 50% 100%, rgba(14,173,124,0.06), transparent 45%);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+}
+
+/* ===== Header / Letterhead ===== */
+.letterhead{
+  border-bottom:2px solid var(--indigo);
+  background:rgba(245,243,255,0.92);
+  backdrop-filter:blur(6px);
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+.letterhead-inner{
+  max-width:760px;
+  margin:0 auto;
+  padding:14px 20px 10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.seal-block{display:flex; align-items:center; gap:10px;}
+.seal{
+  width:38px; height:38px;
+  border:2.5px solid var(--coral);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Spectral',serif;
+  font-weight:700;
+  font-size:12px;
+  color:var(--coral);
+  flex-shrink:0;
+  background:#fff;
+}
+.lh-title{font-family:'Spectral',serif; font-weight:700; font-size:15px; line-height:1.15; color:var(--indigo);}
+.lh-sub{font-size:10.5px; letter-spacing:0.08em; color:var(--graphite); text-transform:uppercase; margin-top:2px;}
+.series-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  border:1.5px solid var(--violet);
+  color:var(--violet);
+  padding:3px 9px;
+  border-radius:3px;
+  font-weight:700;
+  white-space:nowrap;
+  background:#fff;
+}
+.progress-rail{
+  height:4px;
+  background:var(--line);
+  position:relative;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg, var(--violet), var(--coral));
+  width:0%;
+  transition:width .35s ease;
+}
+
+/* ===== Timer pill (appears once test starts) ===== */
+.timer-row{
+  display:none;
+  max-width:760px;
+  margin:0 auto;
+  padding:8px 20px 0;
+  justify-content:flex-end;
+}
+.timer-row.show{display:flex;}
+.timer-pill{
+  font-family:'JetBrains Mono',monospace;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:0.03em;
+  padding:6px 14px;
+  border-radius:20px;
+  background:var(--indigo);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  transition:background .3s;
+}
+.timer-pill .dot{width:7px; height:7px; border-radius:50%; background:var(--teal); flex-shrink:0;}
+.timer-pill.warn{background:var(--amber); color:var(--ink);}
+.timer-pill.warn .dot{background:var(--ink);}
+.timer-pill.danger{background:var(--coral); color:#fff; animation:pulse 1s infinite;}
+.timer-pill.danger .dot{background:#fff;}
+@keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.6;} }
+
+/* ===== Layout ===== */
+.wrap{max-width:760px; margin:0 auto; padding:22px 20px 100px;}
+
+/* ===== Start Screen ===== */
+.start-screen{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:48px 24px;
+  max-width:760px;
+  margin:0 auto;
+}
+.start-screen .seal-big{
+  width:84px; height:84px;
+  border:3px solid var(--coral);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Spectral',serif;
+  font-weight:700;
+  font-size:24px;
+  color:var(--coral);
+  background:#fff;
+  margin-bottom:22px;
+  box-shadow:0 6px 20px rgba(255,92,92,0.18);
+}
+.start-screen h1{
+  font-family:'Spectral',serif;
+  font-weight:700;
+  font-size:28px;
+  color:var(--indigo);
+  margin-bottom:8px;
+  line-height:1.2;
+}
+.start-screen .lead{
+  color:var(--graphite);
+  font-size:14.5px;
+  margin-bottom:32px;
+  max-width:420px;
+  line-height:1.6;
+}
+.facts-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  width:100%;
+  max-width:480px;
+  margin-bottom:32px;
+}
+.fact{
+  background:#fff;
+  border:1.5px solid var(--line);
+  border-radius:10px;
+  padding:16px 10px;
+}
+.fact-num{
+  font-family:'Spectral',serif;
+  font-weight:700;
+  font-size:22px;
+  display:block;
+}
+.fact:nth-child(1) .fact-num{color:var(--violet);}
+.fact:nth-child(2) .fact-num{color:var(--coral);}
+.fact:nth-child(3) .fact-num{color:var(--teal);}
+.fact-label{font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:var(--graphite); margin-top:4px; display:block;}
+.start-btn{
+  font-family:'Inter',sans-serif;
+  font-weight:700;
+  font-size:16px;
+  padding:16px 44px;
+  border-radius:10px;
+  border:none;
+  background:linear-gradient(135deg, var(--violet), var(--indigo));
+  color:#fff;
+  cursor:pointer;
+  box-shadow:0 8px 24px rgba(46,42,140,0.28);
+  transition:transform .12s, box-shadow .12s;
+}
+.start-btn:hover{transform:translateY(-1px); box-shadow:0 10px 28px rgba(46,42,140,0.34);}
+.start-btn:active{transform:translateY(0px) scale(0.98);}
+.start-note{margin-top:14px; font-size:11.5px; color:var(--graphite); font-family:'JetBrains Mono',monospace;}
+
+/* ===== Scoreboard strip ===== */
+.scorebar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+  padding:12px 16px;
+  background:linear-gradient(135deg, var(--indigo), var(--indigo-soft));
+  border-radius:10px;
+  color:#fff;
+}
+.score-item{text-align:center; flex:1;}
+.score-item + .score-item{border-left:1px solid rgba(255,255,255,0.2);}
+.score-num{
+  font-family:'Spectral',serif;
+  font-weight:700;
+  font-size:21px;
+  line-height:1;
+  display:block;
+}
+.score-label{
+  font-size:9.5px;
+  letter-spacing:0.09em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.7);
+  margin-top:3px;
+  display:block;
+}
+.score-num.accent{color:var(--amber);}
+
+/* ===== Question Card ===== */
+.q-card{
+  background:#fff;
+  border:1.5px solid var(--line);
+  border-radius:12px;
+  padding:24px 22px 20px;
+  box-shadow:0 2px 14px rgba(46,42,140,0.05);
+  position:relative;
+}
+.q-meta{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  margin-bottom:14px;
+}
+.q-num{
+  font-family:'Spectral',serif;
+  font-weight:700;
+  font-size:28px;
+  color:var(--coral);
+  line-height:1;
+}
+.q-of{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--graphite);
+}
+.q-text{
+  font-family:'Spectral',serif;
+  font-size:17px;
+  line-height:1.55;
+  color:var(--ink);
+  white-space:pre-line;
+  margin-bottom:20px;
+}
+
+/* ===== OMR-style options ===== */
+.options{display:flex; flex-direction:column; gap:10px;}
+.opt{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:12px 14px;
+  border:1.5px solid var(--line);
+  border-radius:9px;
+  background:var(--paper);
+  cursor:pointer;
+  transition:border-color .15s, background .15s, transform .1s;
+  text-align:left;
+  font-family:'Inter',sans-serif;
+  font-size:14.5px;
+  color:var(--ink);
+  width:100%;
+}
+.opt:hover:not(:disabled){border-color:var(--violet); background:#fff;}
+.opt:active:not(:disabled){transform:scale(0.997);}
+.opt:disabled{cursor:default;}
+.bubble{
+  width:30px; height:30px;
+  border-radius:50%;
+  border:2px solid var(--graphite);
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'JetBrains Mono',monospace;
+  font-weight:700;
+  font-size:13px;
+  color:var(--graphite);
+  background:#fff;
+  transition:all .15s;
+}
+.opt-text{flex:1; line-height:1.4;}
+
+/* selected/answered states */
+.opt.correct{border-color:var(--teal); background:rgba(14,173,124,0.08);}
+.opt.correct .bubble{background:var(--teal); border-color:var(--teal); color:#fff;}
+.opt.wrong{border-color:var(--coral); background:rgba(255,92,92,0.08);}
+.opt.wrong .bubble{background:var(--coral); border-color:var(--coral); color:#fff;}
+.opt.faded{opacity:0.45;}
+
+.feedback-tag{
+  margin-top:14px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:0.03em;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-height:18px;
+}
+.feedback-tag.correct{color:var(--teal);}
+.feedback-tag.wrong{color:var(--coral);}
+.feedback-dot{width:7px; height:7px; border-radius:50%; background:currentColor;}
+
+/* ===== Nav controls ===== */
+.nav-row{
+  display:flex;
+  gap:10px;
+  margin-top:18px;
+}
+.btn{
+  font-family:'Inter',sans-serif;
+  font-weight:700;
+  font-size:13.5px;
+  padding:12px 18px;
+  border-radius:9px;
+  border:1.5px solid var(--indigo);
+  background:var(--indigo);
+  color:#fff;
+  cursor:pointer;
+  transition:opacity .15s, transform .1s;
+  flex:1;
+}
+.btn:hover{opacity:0.88;}
+.btn:active{transform:scale(0.98);}
+.btn.ghost{
+  background:transparent;
+  color:var(--indigo);
+  border:1.5px solid var(--line);
+  flex:0 0 auto;
+  padding:12px 16px;
+}
+.btn.submit{
+  background:var(--coral);
+  border-color:var(--coral);
+  flex:0 0 auto;
+}
+.btn:disabled{opacity:0.35; cursor:not-allowed;}
+.btn:focus-visible, .opt:focus-visible{outline:2.5px solid var(--violet); outline-offset:2px;}
+
+/* ===== Question jump grid (bottom sheet) ===== */
+.jumpgrid{
+  display:grid;
+  grid-template-columns:repeat(10, 1fr);
+  gap:6px;
+  margin-top:18px;
+}
+.jcell{
+  aspect-ratio:1;
+  border-radius:6px;
+  border:1px solid var(--line);
+  background:var(--paper);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10.5px;
+  color:var(--graphite);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+}
+.jcell.done-correct{background:rgba(14,173,124,0.18); border-color:var(--teal); color:var(--teal);}
+.jcell.done-wrong{background:rgba(255,92,92,0.18); border-color:var(--coral); color:var(--coral);}
+.jcell.current{border-width:2px; border-color:var(--violet); font-weight:700; color:var(--violet);}
+
+details.jump-wrap{margin-top:24px;}
+summary{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px;
+  color:var(--violet);
+  cursor:pointer;
+  letter-spacing:0.04em;
+  padding:6px 0;
+  font-weight:600;
+}
+
+/* ===== Results screen ===== */
+.results{display:none;}
+.results.show{display:block;}
+.q-card.results-card{padding:32px 24px; text-align:center;}
+.result-headline{
+  font-family:'JetBrains Mono',monospace;
+  font-weight:700;
+  font-size:13px;
+  color:var(--violet);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+.result-score{
+  font-family:'Spectral',serif;
+  font-weight:700;
+  font-size:64px;
+  color:var(--indigo);
+  line-height:1;
+  margin:10px 0 4px;
+}
+.result-score span{font-size:28px; color:var(--graphite); font-weight:500;}
+.result-sub{color:var(--graphite); font-size:13px; margin-bottom:24px;}
+.result-bars{display:flex; flex-direction:column; gap:10px; margin-bottom:24px; text-align:left;}
+.rbar-row{display:flex; align-items:center; gap:10px; font-size:12.5px;}
+.rbar-label{width:90px; flex-shrink:0; color:var(--graphite); font-family:'Inter',sans-serif;}
+.rbar-track{flex:1; height:9px; background:var(--paper-dim); border-radius:5px; overflow:hidden;}
+.rbar-fill{height:100%; border-radius:5px;}
+.rbar-fill.correct{background:var(--teal);}
+.rbar-fill.wrong{background:var(--coral);}
+.rbar-fill.skip{background:var(--graphite); opacity:0.35;}
+.rbar-num{width:32px; text-align:right; font-family:'JetBrains Mono',monospace; color:var(--ink);}
+
+.review-list{margin-top:6px; text-align:left;}
+.review-item{
+  border-top:1px solid var(--line);
+  padding:14px 0;
+}
+.review-item:first-child{border-top:none;}
+.review-q{font-family:'Spectral',serif; font-size:14.5px; line-height:1.5; white-space:pre-line; margin-bottom:8px;}
+.review-num{color:var(--coral); font-weight:700;}
+.review-ans{font-size:12.5px; line-height:1.6;}
+.review-ans .yours{color:var(--coral);}
+.review-ans .correct-ans{color:var(--teal);}
+
+.restart-row{display:flex; gap:10px; margin-top:8px;}
+
+/* footer note */
+.footnote{
+  text-align:center;
+  font-size:11px;
+  color:var(--graphite);
+  margin-top:28px;
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* time-up banner */
+.timeup-banner{
+  background:var(--coral);
+  color:#fff;
+  text-align:center;
+  font-family:'JetBrains Mono',monospace;
+  font-weight:700;
+  font-size:12.5px;
+  letter-spacing:0.04em;
+  padding:10px;
+  border-radius:9px;
+  margin-bottom:16px;
+  display:none;
+}
+.timeup-banner.show{display:block;}
+
+@media (max-width:420px){
+  .lh-title{font-size:13px;}
+  .lh-sub{font-size:9.5px;}
+  .q-text{font-size:16px;}
+  .result-score{font-size:52px;}
+  .jumpgrid{grid-template-columns:repeat(8,1fr);}
+  .facts-grid{grid-template-columns:repeat(3,1fr); gap:8px;}
+  .fact{padding:12px 6px;}
+  .start-screen h1{font-size:22px;}
+}
+</style>
+</head>
+<body>
+
+<div class="letterhead">
+  <div class="letterhead-inner">
+    <div class="seal-block">
+      <div class="seal">BPSC</div>
+      <div>
+        <div class="lh-title">69th Combined (Pre.) Exam.</div>
+        <div class="lh-sub">General Studies · Mock Run</div>
+      </div>
+    </div>
+    <div class="series-tag" id="seriesTag">SET A</div>
+  </div>
+  <div class="progress-rail"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="timer-row" id="timerRow">
+  <div class="timer-pill" id="timerPill"><span class="dot"></span><span id="timerText">02:00:00</span></div>
+</div>
+
+<!-- START SCREEN -->
+<div class="start-screen" id="startScreen">
+  <div class="seal-big">BPSC</div>
+  <h1>69th BPSC Prelims — Set A</h1>
+  <p class="lead">A full-length General Studies mock run. Once you start, the clock begins — answer at your own pace and submit whenever you're ready.</p>
+  <div class="facts-grid">
+    <div class="fact"><span class="fact-num">150</span><span class="fact-label">Questions</span></div>
+    <div class="fact"><span class="fact-num">2 hrs</span><span class="fact-label">Time limit</span></div>
+    <div class="fact"><span class="fact-num">+1</span><span class="fact-label">Per correct</span></div>
+  </div>
+  <button class="start-btn" id="startBtn">Start test</button>
+  <div class="start-note">No negative marking · auto-submits when time runs out</div>
+</div>
+
+<div class="wrap" id="mainWrap" style="display:none;">
+
+  <div class="timeup-banner" id="timeupBanner">⏱ Time's up — your test was submitted automatically</div>
+
+  <div class="scorebar">
+    <div class="score-item">
+      <span class="score-num accent" id="scoreNum">0</span>
+      <span class="score-label">Score</span>
+    </div>
+    <div class="score-item">
+      <span class="score-num" id="answeredNum">0/150</span>
+      <span class="score-label">Attempted</span>
+    </div>
+    <div class="score-item">
+      <span class="score-num" id="accuracyNum">—</span>
+      <span class="score-label">Accuracy</span>
+    </div>
+  </div>
+
+  <!-- QUIZ VIEW -->
+  <div id="quizView">
+    <div class="q-card">
+      <div class="q-meta">
+        <span class="q-num" id="qNum">1</span>
+        <span class="q-of">/ 150</span>
+      </div>
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="optionsBox"></div>
+      <div class="feedback-tag" id="feedbackTag"></div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn ghost" id="prevBtn">← Prev</button>
+      <button class="btn" id="nextBtn">Next question →</button>
+      <button class="btn submit" id="submitBtn">Submit</button>
+    </div>
+
+    <details class="jump-wrap">
+      <summary>Jump to any question (1–150)</summary>
+      <div class="jumpgrid" id="jumpGrid"></div>
+    </details>
+
+    <div class="footnote">No negative marking · +1 for each correct answer</div>
+  </div>
+
+  <!-- RESULTS VIEW -->
+  <div id="resultsView" class="results">
+    <div class="q-card results-card">
+      <div class="result-headline" id="resultHeadline">Test complete</div>
+      <div class="result-score" id="finalScore">0<span> / 150</span></div>
+      <div class="result-sub" id="finalSub"></div>
+
+      <div class="result-bars" id="resultBars"></div>
+
+      <div class="restart-row">
+        <button class="btn" id="reviewBtn">Review all answers</button>
+        <button class="btn ghost" id="restartBtn">Restart test</button>
+      </div>
+    </div>
+
+    <div class="q-card" id="reviewCard" style="display:none; margin-top:16px;">
+      <div class="review-list" id="reviewList"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script>
+const TOTAL = QUESTIONS.length;
+const TIME_LIMIT_SECONDS = 2 * 60 * 60; // 2 hours
+
+let current = 0;
+let score = 0;
+let answers = new Array(TOTAL).fill(null); // stores selected index or null
+let timeRemaining = TIME_LIMIT_SECONDS;
+let timerInterval = null;
+let testActive = false;
+let autoSubmitted = false;
+
+const startScreen = document.getElementById('startScreen');
+const mainWrap = document.getElementById('mainWrap');
+const startBtn = document.getElementById('startBtn');
+const timerRow = document.getElementById('timerRow');
+const timerPill = document.getElementById('timerPill');
+const timerText = document.getElementById('timerText');
+const timeupBanner = document.getElementById('timeupBanner');
+
+const qNumEl = document.getElementById('qNum');
+const qTextEl = document.getElementById('qText');
+const optionsBox = document.getElementById('optionsBox');
+const feedbackTag = document.getElementById('feedbackTag');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const scoreNum = document.getElementById('scoreNum');
+const answeredNum = document.getElementById('answeredNum');
+const accuracyNum = document.getElementById('accuracyNum');
+const progressFill = document.getElementById('progressFill');
+const jumpGrid = document.getElementById('jumpGrid');
+const quizView = document.getElementById('quizView');
+const resultsView = document.getElementById('resultsView');
+
+const LETTERS = ['A','B','C','D'];
+
+function formatTime(totalSeconds){
+  const h = Math.floor(totalSeconds/3600);
+  const m = Math.floor((totalSeconds%3600)/60);
+  const s = totalSeconds%60;
+  return [h,m,s].map(v=>String(v).padStart(2,'0')).join(':');
+}
+
+function startTest(){
+  testActive = true;
+  startScreen.style.display = 'none';
+  mainWrap.style.display = 'block';
+  timerRow.classList.add('show');
+  buildJumpGrid();
+  render();
+  timerInterval = setInterval(tickTimer, 1000);
+}
+
+function tickTimer(){
+  if(!testActive) return;
+  timeRemaining--;
+  if(timeRemaining <= 0){
+    timeRemaining = 0;
+    updateTimerDisplay();
+    autoSubmitted = true;
+    finishTest();
+    return;
+  }
+  updateTimerDisplay();
+}
+
+function updateTimerDisplay(){
+  timerText.textContent = formatTime(timeRemaining);
+  timerPill.classList.remove('warn','danger');
+  if(timeRemaining <= 300){ // last 5 minutes
+    timerPill.classList.add('danger');
+  } else if(timeRemaining <= 900){ // last 15 minutes
+    timerPill.classList.add('warn');
+  }
+}
+
+startBtn.addEventListener('click', startTest);
+
+function buildJumpGrid(){
+  jumpGrid.innerHTML = '';
+  for(let i=0;i<TOTAL;i++){
+    const cell = document.createElement('div');
+    cell.className = 'jcell';
+    cell.textContent = i+1;
+    cell.dataset.idx = i;
+    cell.addEventListener('click', ()=>{ current = i; render(); });
+    jumpGrid.appendChild(cell);
+  }
+  refreshJumpGrid();
+}
+
+function refreshJumpGrid(){
+  const cells = jumpGrid.children;
+  for(let i=0;i<TOTAL;i++){
+    const cell = cells[i];
+    cell.classList.remove('done-correct','done-wrong','current');
+    if(answers[i] !== null){
+      const isCorrect = answers[i] === QUESTIONS[i].answer;
+      cell.classList.add(isCorrect ? 'done-correct' : 'done-wrong');
+    }
+    if(i === current) cell.classList.add('current');
+  }
+}
+
+function updateScoreboard(){
+  const attempted = answers.filter(a => a !== null).length;
+  scoreNum.textContent = score;
+  answeredNum.textContent = `${attempted}/${TOTAL}`;
+  accuracyNum.textContent = attempted ? Math.round((score/attempted)*100) + '%' : '—';
+  progressFill.style.width = (attempted/TOTAL*100) + '%';
+}
+
+function render(){
+  const q = QUESTIONS[current];
+  qNumEl.textContent = current + 1;
+  qTextEl.textContent = q.q;
+  optionsBox.innerHTML = '';
+  feedbackTag.className = 'feedback-tag';
+  feedbackTag.textContent = '';
+
+  const userAns = answers[current];
+  const isAnswered = userAns !== null;
+
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="bubble">${LETTERS[idx]}</span><span class="opt-text">${opt}</span>`;
+    if(isAnswered){
+      btn.disabled = true;
+      if(idx === q.answer){
+        btn.classList.add('correct');
+      } else if(idx === userAns){
+        btn.classList.add('wrong');
+      } else {
+        btn.classList.add('faded');
+      }
+    } else {
+      btn.addEventListener('click', () => selectAnswer(idx));
+    }
+    optionsBox.appendChild(btn);
+  });
+
+  if(isAnswered){
+    const correct = userAns === q.answer;
+    feedbackTag.classList.add(correct ? 'correct' : 'wrong');
+    feedbackTag.innerHTML = `<span class="feedback-dot"></span>${correct ? 'Correct — +1' : 'Incorrect — correct answer is ' + LETTERS[q.answer]}`;
+  }
+
+  prevBtn.disabled = current === 0;
+  nextBtn.textContent = current === TOTAL - 1 ? 'Finish review' : 'Next question →';
+  nextBtn.disabled = current === TOTAL - 1;
+
+  refreshJumpGrid();
+  updateScoreboard();
+}
+
+function selectAnswer(idx){
+  if(answers[current] !== null) return;
+  answers[current] = idx;
+  if(idx === QUESTIONS[current].answer){
+    score += 1;
+  }
+  render();
+}
+
+prevBtn.addEventListener('click', () => {
+  if(current > 0){ current--; render(); }
+});
+
+nextBtn.addEventListener('click', () => {
+  if(current < TOTAL - 1){
+    current++;
+    render();
+  }
+});
+
+submitBtn.addEventListener('click', () => {
+  const attempted = answers.filter(a => a !== null).length;
+  const remaining = TOTAL - attempted;
+  if(remaining > 0){
+    const ok = confirm(`You still have ${remaining} unanswered question${remaining===1?'':'s'}. Submit anyway?`);
+    if(!ok) return;
+  }
+  finishTest();
+});
+
+function finishTest(){
+  testActive = false;
+  clearInterval(timerInterval);
+  showResults();
+}
+
+function showResults(){
+  quizView.style.display = 'none';
+  resultsView.classList.add('show');
+
+  if(autoSubmitted){
+    timeupBanner.classList.add('show');
+    document.getElementById('resultHeadline').textContent = 'Time\'s up — auto-submitted';
+  } else {
+    document.getElementById('resultHeadline').textContent = 'Test complete';
+  }
+
+  const attempted = answers.filter(a => a !== null).length;
+  const correct = score;
+  const wrong = answers.filter((a,i) => a !== null && a !== QUESTIONS[i].answer).length;
+  const skipped = TOTAL - attempted;
+  const timeUsed = TIME_LIMIT_SECONDS - timeRemaining;
+
+  document.getElementById('finalScore').innerHTML = `${score}<span> / ${TOTAL}</span>`;
+  document.getElementById('finalSub').textContent = `${attempted} attempted · ${correct} correct · ${wrong} incorrect · ${skipped} skipped · time used ${formatTime(timeUsed)}`;
+
+  const bars = document.getElementById('resultBars');
+  bars.innerHTML = `
+    <div class="rbar-row">
+      <span class="rbar-label">Correct</span>
+      <div class="rbar-track"><div class="rbar-fill correct" style="width:${correct/TOTAL*100}%"></div></div>
+      <span class="rbar-num">${correct}</span>
+    </div>
+    <div class="rbar-row">
+      <span class="rbar-label">Incorrect</span>
+      <div class="rbar-track"><div class="rbar-fill wrong" style="width:${wrong/TOTAL*100}%"></div></div>
+      <span class="rbar-num">${wrong}</span>
+    </div>
+    <div class="rbar-row">
+      <span class="rbar-label">Skipped</span>
+      <div class="rbar-track"><div class="rbar-fill skip" style="width:${skipped/TOTAL*100}%"></div></div>
+      <span class="rbar-num">${skipped}</span>
+    </div>
+  `;
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.getElementById('reviewBtn').addEventListener('click', () => {
+  const card = document.getElementById('reviewCard');
+  const isShown = card.style.display !== 'none';
+  if(isShown){ card.style.display = 'none'; return; }
+  card.style.display = 'block';
+  const list = document.getElementById('reviewList');
+  list.innerHTML = QUESTIONS.map((q,i) => {
+    const userAns = answers[i];
+    const correctText = q.options[q.answer];
+    let ansLine;
+    if(userAns === null){
+      ansLine = `<span class="yours">Skipped</span> · Correct answer: <span class="correct-ans">${LETTERS[q.answer]}. ${correctText}</span>`;
+    } else if(userAns === q.answer){
+      ansLine = `<span class="correct-ans">Your answer: ${LETTERS[userAns]}. ${q.options[userAns]} ✓</span>`;
+    } else {
+      ansLine = `<span class="yours">Your answer: ${LETTERS[userAns]}. ${q.options[userAns]} ✗</span><br>Correct answer: <span class="correct-ans">${LETTERS[q.answer]}. ${correctText}</span>`;
+    }
+    return `<div class="review-item">
+      <div class="review-q"><span class="review-num">${i+1}.</span> ${q.q}</div>
+      <div class="review-ans">${ansLine}</div>
+    </div>`;
+  }).join('');
+});
+
+document.getElementById('restartBtn').addEventListener('click', () => {
+  current = 0;
+  score = 0;
+  answers = new Array(TOTAL).fill(null);
+  timeRemaining = TIME_LIMIT_SECONDS;
+  autoSubmitted = false;
+  clearInterval(timerInterval);
+  resultsView.classList.remove('show');
+  quizView.style.display = 'block';
+  document.getElementById('reviewCard').style.display = 'none';
+  timeupBanner.classList.remove('show');
+  mainWrap.style.display = 'none';
+  timerRow.classList.remove('show');
+  startScreen.style.display = 'flex';
+  window.scrollTo({top:0});
+});
+</script>
+
+</body>
+</html>
